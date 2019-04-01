@@ -20,11 +20,11 @@ Third required project for the [Full Stack Web Developer Nanodegree][link_1].
 6. `psycopg2`, `psycopg2-binary` inside the virtual envrironement of the item-catalog project. The requirements.txt file is included in the repo.
 
 
-## Summary of the configurations steps and changes
+## Summary of the configuration steps and changes
 
 - Download the default, automatically created, **Private/Public Key Pair** from **AWS LightSail Instance** page and change its permission to be **read/write** by the local machine's owner only: `chmod 600 /path/to/LightSail_Default_key.pem`.
 
-- SSH to the Instance using the downloaded **default key pair**: `ssh -p 22 -i /path/to/LightSail_Default_key.pem ubuntu@<instance's_Static_or_Public_IP_address>`.
+- SSH to the Instance using the downloaded **default key pair** and the default **ubuntu** username: `ssh -p 22 -i /path/to/LightSail_Default_key.pem ubuntu@<instance's_Static_or_Public_IP_address>`.
 
 - Create two users with **sudo** privileges:
     - Create user: `sudo adduser <user_name>`.
@@ -51,7 +51,7 @@ Third required project for the [Full Stack Web Developer Nanodegree][link_1].
     - **Change the SSH Port:** Change `#Port 22` to `Port 2200`.
     - **Permit Log in by the Root User:** `PermitRootLogin no`.
     - **Stop SSHing to the remote server using Password Authentication:** `PasswordAuthentication no`.
-    - **Restart the ssh configuration:** `sudo service restart ssh` or `sudo systemctl restart ssh`.
+    - **Restart the SSH service:** `sudo service restart ssh` or `sudo systemctl restart ssh`.
 
 - Configure the **Uncomplicated FireWall (UFW)** to only accept requests on the ports **123 (NTP)**, **80 (HTTP)** and **2200 (SSH)**:
     - `sudo ufw default deny incoming`
@@ -83,15 +83,15 @@ Third required project for the [Full Stack Web Developer Nanodegree][link_1].
             sudo find /var/www/html -type f -exec chmod u+rw {} +
             ```
 
-    - `git clone` the item catalog project.
-    - `nano setup.wsgi` from within the **cloned item-catalog directory**:
+    - `git clone` the **item-catalog** project.
+    - `nano setup.wsgi` from within the **cloned item-catalog** directory:
         ```
         import sys
         sys.path.insert(0, '/var/www/html/movie_catalog')
         from setup import app as application
         ```
 
-    - `mkdir venvs` inside the project's directory.
+    - `mkdir venvs` inside the **item-catalog** directory.
     - `cd venvs`
     - `python3 -m venv venv`
     - `source venv/bin/activate`
@@ -118,7 +118,7 @@ Third required project for the [Full Stack Web Developer Nanodegree][link_1].
 - Restart the **Apache Server**: `sudo systemctl restart apache2` or `sudo apache2ctl restart`.
 
 - Configure the postgres database:    
-    - `sudo su - postgresq`
+    - `sudo su - postgres`
     - `psql`
     - `CREATE DATABASE movie_catalog;`
     - `CREATE USER catalog WITH PASSWORD '<password>';`
@@ -128,6 +128,7 @@ Third required project for the [Full Stack Web Developer Nanodegree][link_1].
     - `GRANT ALL PRIVILEGES ON DATABASE movie_catalog TO catalog;`
     - `\q`
     - `exit`
+    - To login to the created database again: `psql postgresql://<database_user>:<user_password>@localhost/<database_name>`
 
 
 - Create a **config.json** file in the **/etc/** directory &mdash; whose content will be used inside the **setup.py** file &mdash; with the following variables and their values:
