@@ -77,19 +77,20 @@ Third required project for the [Full Stack Web Developer Nanodegree][link_1].
             sudo find /var/www/html -type f -exec chmod g+r {} +
             ```
         2. Give the owner **read/write** privileges and permit directory access to other users:
-        ```
-        sudo chown -R <user_name> /var/www/html/
-        sudo find /var/www/html -type d -exec chmod u+rwx {} +
-        sudo find /var/www/html -type f -exec chmod u+rw {} +
-        ```
+            ```
+            sudo chown -R <user_name> /var/www/html/
+            sudo find /var/www/html -type d -exec chmod u+rwx {} +
+            sudo find /var/www/html -type f -exec chmod u+rw {} +
+            ```
 
     - `git clone` the item catalog project.
     - `nano setup.wsgi` from within the **cloned item-catalog directory**:
         ```
-    import sys
-    sys.path.insert(0, '/var/www/html/movie_catalog')
-    from setup import app as application
+        import sys
+        sys.path.insert(0, '/var/www/html/movie_catalog')
+        from setup import app as application
         ```
+
     - `mkdir venvs` inside the project's directory.
     - `cd venvs`
     - `python3 -m venv venv`
@@ -99,16 +100,16 @@ Third required project for the [Full Stack Web Developer Nanodegree][link_1].
 - Create a **movie_catalog.conf** in the **/etc/apache2/sites-available/** directory, with the following content:
 
     ```
-<VirtualHost *:80>
-    ServerName mymovies.cf
-    WSGIDaemonProcess setup user=www-data group=www-data threads=5 python-home=/var/www/html/movie_catalog/venvs/venv
-    WSGIScriptAlias / /var/www/html/movie_catalog/setup.wsgi
-    <Directory /var/www/html/movie_catalog>
-        WSGIProcessGroup setup
-        WSGIApplicationGroup %{GLOBAL}
-        Require all granted
-    </Directory>
-</VirtualHost>
+    <VirtualHost *:80>
+        ServerName mymovies.cf
+        WSGIDaemonProcess setup user=www-data group=www-data threads=5 python-home=/var/www/html/movie_catalog/venvs/venv
+        WSGIScriptAlias / /var/www/html/movie_catalog/setup.wsgi
+        <Directory /var/www/html/movie_catalog>
+            WSGIProcessGroup setup
+            WSGIApplicationGroup %{GLOBAL}
+            Require all granted
+        </Directory>
+    </VirtualHost>
 
     ```
 
