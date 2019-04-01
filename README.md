@@ -154,7 +154,7 @@ Third required project for the [Full Stack Web Developer Nanodegree][link_1].
 
 ## Resources and References:
 
-- [mod_wsgi (Apache)¶][link_2]
+- [mod_wsgi (Apache)][link_2]
 - [mod_wsgi with virtual envrironements][link_3]
 - Deploy Python3.6.x Flask Hello World App on Apache2 and Ubuntu 18.04:
     - [Example 1][link_4]
