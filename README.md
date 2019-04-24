@@ -8,7 +8,7 @@ Third required project for the [Full Stack Web Developer Nanodegree][link_1].
 
 ## URI to the Hosted Web Application
 
-#### http://mymovies.cf
+#### www.mymovies.cf
 
 
 ## Summary of the software installed
@@ -21,6 +21,8 @@ Third required project for the [Full Stack Web Developer Nanodegree][link_1].
 
 
 ## Summary of the configuration steps and changes
+
+- Create a new LightSail Instance (Ubuntu Server) in [Amazon Website][link_2], create a Static IP and attach it to the created instance.
 
 - Download the default, automatically created, **Private/Public Key Pair** from **AWS LightSail Instance** page and change its permission to be **read/write** by the local machine's owner only: `chmod 600 /path/to/LightSail_Default_key.pem`.
 
@@ -102,6 +104,7 @@ Third required project for the [Full Stack Web Developer Nanodegree][link_1].
     ```
     <VirtualHost *:80>
         ServerName mymovies.cf
+        ServerAlias *.mymovies.cf 52.28.246.104
         WSGIDaemonProcess setup user=www-data group=www-data threads=5 python-home=/var/www/html/movie_catalog/venvs/venv
         WSGIScriptAlias / /var/www/html/movie_catalog/setup.wsgi
         <Directory /var/www/html/movie_catalog>
@@ -154,22 +157,23 @@ Third required project for the [Full Stack Web Developer Nanodegree][link_1].
 
 ## Resources and References:
 
-- [mod_wsgi (Apache)][link_2]
-- [mod_wsgi with virtual envrironements][link_3]
+- [mod_wsgi (Apache) Documentation][link_3]
+- [mod_wsgi with virtual environments Documentation][link_4]
 - Deploy Python3.6.x Flask Hello World App on Apache2 and Ubuntu 18.04:
-    - [Example 1][link_4]
-    - [Example 2][link_5]
-- [Fixing Apache2 permission problems from StackOverflow][link_6]
-- [SQLAlchemy Engine Configuration with PostgreSQL][link_7]
-- [Configuring PostgreSQL with Django Application on Ubuntu 14.04][link_8]
+    - [Example 1][link_5]
+    - [Example 2][link_6]
+- [Fixing Apache2 permission problems from StackOverflow][link_7]
+- [SQLAlchemy Engine Configuration with PostgreSQL Documentation][link_8]
+- [Configuring PostgreSQL with Django Application on Ubuntu 14.04][link_9]
 
 [//]:  # (Links and images relative paths)
 
 [link_1]: <https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004>
-[link_2]: <http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/>
-[link_3]: <https://modwsgi.readthedocs.io/en/develop/user-guides/virtual-environments.html>
-[link_4]: <http://terokarvinen.com/2016/deploy-flask-python3-on-apache2-ubuntu>
-[link_5]: <https://www.codementor.io/abhishake/minimal-apache-configuration-for-deploying-a-flask-app-ubuntu-18-04-phu50a7ft>
-[link_6]: <https://askubuntu.com/a/767534/902110>
-[link_7]: <https://docs.sqlalchemy.org/en/latest/core/engines.html#postgresql>
-[link_8]: <https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-14-04>
+[link_2]: <https://lightsail.aws.amazon.com>
+[link_3]: <http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/>
+[link_4]: <https://modwsgi.readthedocs.io/en/develop/user-guides/virtual-environments.html>
+[link_5]: <http://terokarvinen.com/2016/deploy-flask-python3-on-apache2-ubuntu>
+[link_6]: <https://www.codementor.io/abhishake/minimal-apache-configuration-for-deploying-a-flask-app-ubuntu-18-04-phu50a7ft>
+[link_7]: <https://askubuntu.com/a/767534/902110>
+[link_8]: <https://docs.sqlalchemy.org/en/latest/core/engines.html#postgresql>
+[link_9]: <https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-14-04>
